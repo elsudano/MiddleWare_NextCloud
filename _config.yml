@@ -13,13 +13,14 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Auto Build CPD
+title: Auto build CPD
 email: cdelatorre@correo.ugr.es
 description: > # this means to ignore newlines until "baseurl:"
-  Página del proyecto para la asignatura Infraestructura Virtual
-  para el Grado de Ingeniería Informática
-baseurl: "/autobuildcpd/" # the subpath of your site, e.g. /blog
-url: "https://elsudano.github.io" # the base hostname & protocol for your site
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "/autobuildcpd" # the subpath of your site, e.g. /blog
+url: "https://github.com/elsudano" # the base hostname & protocol for your site
 twitter_username: elsudano
 github_username:  elsudano
 
