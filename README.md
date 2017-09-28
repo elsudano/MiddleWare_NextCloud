@@ -21,15 +21,14 @@
 4. Servidores ftp: servira para poder subir información a Owncloud
 6. Contenedores: software especifico que brinda la posibilidad de generar diferentes instancia de entornos virtuales
 
-## Intalación y ejecución
+## Tests, Intalación y ejecución
 
-* `python setup.py install` para instalar todas las dependencias fuente: [Python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
-* `python MyOwncloudBot.py` para ejecutar el Bot, la estructura principal esta sacada del mismo repositorio.
+* `make tests` para poder pasar todos los test
+* `make install` para instalar todas las dependencias fuente: [Python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+* `make run` para ejecutar el Bot, la estructura principal esta sacada del mismo repositorio.
 
 ## Sistemas de Integración Continua
 
-Se usará el sistema de integración continua XXXXXXX para poder desplegar de manera fácil y con los menos errores posibles el bot de telegram que se encargara de realizar conexiones con un servidor de Owncloud.
+Se usará el sistema de integración continua TRAVIS.CI para poder testear de manera fácil y con los menos errores posibles el bot de telegram que se encargara de realizar conexiones con un servidor de Owncloud.
 
-Se ha elegido esta plataforma por que XXXXXXXXXXXXXx
-
-Tal y como se muestra al principo de este documento los test realiados en XXXXXX tienen una covertura de XXX
+Los tests serán tests unitarios en un primer momento, mas adelante se intentara que sean tests de covertura.
