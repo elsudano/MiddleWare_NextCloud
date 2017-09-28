@@ -32,3 +32,4 @@
 Se usará el sistema de integración continua TRAVIS.CI para poder testear de manera fácil y con los menos errores posibles el bot de telegram que se encargara de realizar conexiones con un servidor de Owncloud.
 
 Los tests serán tests unitarios en un primer momento, mas adelante se intentara que sean tests de covertura.
+ 
