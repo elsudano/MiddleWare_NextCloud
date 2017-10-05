@@ -1,13 +1,13 @@
-# MyOwncloudBot
+# MiddleWare for OwnCloud Platform
 
-![passing](https://travis-ci.org/elsudano/OwncloudBot.svg?branch=master)
-[![Code Climate](https://codeclimate.com/github/elsudano/OwncloudBot/badges/gpa.svg)](https://codeclimate.com/github/elsudano/OwncloudBot)
-[![Test Coverage](https://codeclimate.com/github/elsudano/OwncloudBot/badges/coverage.svg)](https://codeclimate.com/github/elsudano/OwncloudBot/coverage)
-[![Issue Count](https://codeclimate.com/github/elsudano/OwncloudBot/badges/issue_count.svg)](https://codeclimate.com/github/elsudano/OwncloudBot)
+![passing](https://travis-ci.org/elsudano/MiddleWare_ownCloud.svg?branch=master)
+[![Code Climate](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/gpa.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
+[![Test Coverage](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/coverage.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/coverage)
+[![Issue Count](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/issue_count.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
 
-<p>Bot de Telegram que intentara aprobechar las diferentes funciones de la API que tiene Owncloud, para poder hacer de asistente personal</p>
+<p>Aplicación que pretende ser un paso intermedio para futuras aplicaciones de consulta rápida a la estructura ya montado de OwnCloud</p>
 
-<p>Lo que se pretende en este proyecto es poder desplegar un servidor de Oncloud, con sus bases de datos y su interfaz web y tambien el propio bot todo en el mismo entorno y así poder ofrecer un servicio integral de asistente personal</p>
+<p>Lo que se pretende en este proecto es poder desplegar de manera automática toda la infraestructura necesaria para poder hacer funcionar este middleware y así de esta forma hacer posible la conexión de otras aplicaciones a owncloud de manera mas fácil y trasparente </p>
 
 ## Objetivos principales
 
@@ -15,21 +15,12 @@
 
 ## Herramientas
 
-1. Entornos virtuales de programación: Se intentará usar estos entornos para asegurarnos la compativilidad con las versiones del lenguaje.
-2. Base de Datos: se utilizara un servidor de base de datos almacenar los datos de owncloud.
-3. Servidores web: se utilizará para dar soporte a owncloud y su interfaz web.
-4. Servidores ftp: servira para poder subir información a Owncloud
-6. Contenedores: software especifico que brinda la posibilidad de generar diferentes instancia de entornos virtuales
 
 ## Tests, Intalación y ejecución
 
-* `make tests` para poder pasar todos los test
-* `make install` para instalar todas las dependencias fuente: [Python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
-* `make run` para ejecutar el Bot, la estructura principal esta sacada del mismo repositorio.
 
 ## Sistemas de Integración Continua
 
-Se usará el sistema de integración continua TRAVIS.CI para poder testear de manera fácil y con los menos errores posibles el bot de telegram que se encargara de realizar conexiones con un servidor de Owncloud.
+Se usará el sistema de integración continua TRAVIS.CI para poder testear de manera fácil y con los menos errores posibles el MiddleWare que se encargara de realizar conexiones con un servidor de Owncloud.
 
 Los tests serán tests unitarios en un primer momento, mas adelante se intentara que sean tests de covertura.
- 
