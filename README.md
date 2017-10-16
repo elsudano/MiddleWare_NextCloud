@@ -1,6 +1,6 @@
 # MiddleWare for OwnCloud Platform
 
-![passing](https://travis-ci.org/elsudano/MiddleWare_ownCloud.svg?branch=master)
+[![Build Status](https://travis-ci.org/elsudano/MiddleWare_ownCloud.svg?branch=master)](https://travis-ci.org/elsudano/MiddleWare_ownCloud)
 [![Code Climate](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/gpa.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
 [![Test Coverage](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/coverage.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/coverage)
 [![Issue Count](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/issue_count.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
