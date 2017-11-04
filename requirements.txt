@@ -1,2 +1,0 @@
-codeclimate-test-reporter
-python-telegram-bot
