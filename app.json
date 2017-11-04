@@ -1,0 +1,10 @@
+{
+  "name": "Middleware for NextCloud",
+  "description": "Middleware for connect with NextCloud",
+  "keywords": [
+    "NextCloud",
+    "go",
+  ],
+  "website": "https://elsudano.github.io/MiddleWare_NextCloud",
+  "repository": "https://github.com/elsudano/MiddleWare_NextCloud"
+}
