@@ -1,11 +1,11 @@
-# MiddleWare for OwnCloud Platform
+# MiddleWare for NextCloud Platform
 
 [![Build Status](https://travis-ci.org/elsudano/MiddleWare_ownCloud.svg?branch=master)](https://travis-ci.org/elsudano/MiddleWare_ownCloud)
 [![Code Climate](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/gpa.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
 [![Test Coverage](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/coverage.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/coverage)
 [![Issue Count](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/issue_count.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
 
-<p>Aplicación que pretende ser un paso intermedio para futuras aplicaciones de consulta rápida a la estructura ya montado de OwnCloud</p>
+<p>Aplicación que pretende ser un paso intermedio para futuras aplicaciones de consulta rápida a la estructura ya montado de NextCloud</p>
 
 <p>Lo que se pretende en este proecto es poder desplegar de manera automática toda la infraestructura necesaria para poder hacer funcionar este middleware y así de esta forma hacer posible la conexión de otras aplicaciones a owncloud de manera mas fácil y trasparente </p>
 
