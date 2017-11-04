@@ -1,56 +1,59 @@
-.DEFAULT_GOAL := help
-.PHONY: clean pep257 pep8 yapf lint test install
+###############################################################################
+# Variable que guarda los ficheros que hay que compilar
+SRC_DIR = src
 
-PYLINT          := pylint
-NOSETESTS       := nosetests
-PEP257          := pep257
-PEP8            := flake8
-YAPF            := yapf
-PIP             := pip
-PYTHON			:= python
+###############################################################################
+# Extraemos los nombres de los ficheros para los binarios
+BIN_DIR = bin
 
-clean:
-	rm -fr build
-	rm -fr dist
-	find . -name '*.pyc' -exec rm -f {} \;
-	find . -name '*.pyo' -exec rm -f {} \;
-	find . -name '*~' -exec rm -f {} \;
-	find . -regex "./telegram.\(mp3\|mp4\|ogg\|png\|webp\)" -exec rm {} \;
+###############################################################################
+# Variables que no cambian para cualquier compilación
+# Extención de los ficheros fuente
+EXT = go # pueden ser go
 
-pep257:
-	$(PEP257) OwncloudBot
+###############################################################################
+# Nombre del programa Principal
+NAME = main
 
-pep8:
-	$(PEP8) OwncloudBot
+###############################################################################
+# Comando para eliminar los ficheros
+RM = rm -Rf
 
-yapf:
-	$(YAPF) -r OwncloudBot
+###############################################################################
+# Indica cual es el compilador para los fuentes
+COMPILER = go
 
-lint:
-	$(PYLINT) -E OwncloudBot --disable=no-name-in-module,import-error
+.PHONY: help
+.SECONDARY:
 
-test:
-	$(NOSETESTS) -v
+all: help
 
-install:
-	$(PIP)  install -r requirements.txt
+makedir:
+	mkdir ./$(BIN_DIR)
 
 run:
-	$(PYTHON) OwncloudBot/MyOwncloudBot.py
+	$(COMPILER) run $(SRC_DIR)/$(NAME).$(EXT)
+
+build: clean makedir
+	$(COMPILER) build -o $(BIN_DIR)/$(NAME) $(SRC_DIR)/$(NAME).$(EXT)
+
+docu:
+	doxygen ./doc/doxys/dox_config
+
+clean:
+	$(RM) $(BIN_DIR) doc/html/* doc/latex/*
+
+touch:
+	touch $(SRC_DIR)/*
 
 help:
 	@echo "Available targets:"
-	@echo "- clean       Clean up the source directory"
-	@echo "- pep257      Check docstring style with pep257"
-	@echo "- pep8        Check style with flake8"
-	@echo "- lint        Check style with pylint"
-	@echo "- yapf        Check style with yapf"
+	@echo "- run       Run Application whitout compile"
+	@echo "- build       Generate bin file on directory $(BIN_DIR)"
+	@echo "- clean       Clean up the source directory $(SRC_DIR) and bin directory $(BIN_DIR)"
 	@echo "- test        Run tests"
+	@echo "- help        This info"
 	@echo
 	@echo "Available variables:"
-	@echo "- PYLINT      default: $(PYLINT)"
-	@echo "- NOSETESTS   default: $(NOSETESTS)"
-	@echo "- PEP257      default: $(PEP257)"
-	@echo "- PEP8        default: $(PEP8)"
-	@echo "- YAPF        default: $(YAPF)"
-	@echo "- PIP         default: $(PIP)"
+	@echo "- SRC_DIR      default: $(SRC_DIR)"
+	@echo
