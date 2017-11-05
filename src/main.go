@@ -12,16 +12,16 @@ import (
 func main() {
 
     router := mux.NewRouter().StrictSlash(true)
-    router.HandleFunc("/", Exit)
+    router.HandleFunc("/", Index)
     router.HandleFunc("/index", Index)
     router.HandleFunc("/todos", TodoIndex)
     router.HandleFunc("/todos/{todoId}", TodoShow)
 
-    log.Fatal(http.ListenAndServe(":80", router))
+    log.Fatal(http.ListenAndServe(":8080", router))
 }
 
 func Exit(w http.ResponseWriter, r *http.Request) {
-    os.Exit(1)
+    os.Exit(0)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
