@@ -12,7 +12,7 @@ import (
 func main() {
 
     router := mux.NewRouter().StrictSlash(true)
-    router.HandleFunc("/", Index)
+    router.HandleFunc("/", Exit)
     router.HandleFunc("/index", Index)
     router.HandleFunc("/todos", TodoIndex)
     router.HandleFunc("/todos/{todoId}", TodoShow)

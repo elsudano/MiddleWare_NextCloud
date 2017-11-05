@@ -26,7 +26,7 @@ COMPILER = go
 .PHONY: help
 .SECONDARY:
 
-all: help
+all: clean build
 
 makedir:
 	mkdir ./$(BIN_DIR)
