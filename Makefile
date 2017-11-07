@@ -13,7 +13,7 @@ EXT = go # pueden ser go
 
 ###############################################################################
 # Nombre del programa Principal
-NAME = main
+NAME = *
 
 ###############################################################################
 # Comando para eliminar los ficheros
