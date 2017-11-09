@@ -1,10 +1,10 @@
 ###############################################################################
 # Variable que guarda los ficheros que hay que compilar
-SRC_DIR = src
+SRC_DIR =
 
 ###############################################################################
 # Extraemos los nombres de los ficheros para los binarios
-BIN_DIR = bin
+BIN_DIR = bin/
 
 ###############################################################################
 # Variables que no cambian para cualquier compilación
@@ -32,10 +32,10 @@ makedir:
 	mkdir ./$(BIN_DIR)
 
 run:
-	$(COMPILER) run $(SRC_DIR)/$(NAME).$(EXT)
+	$(COMPILER) run $(SRC_DIR)$(NAME).$(EXT)
 
 build: clean makedir
-	$(COMPILER) build -o $(BIN_DIR)/$(NAME) $(SRC_DIR)/$(NAME).$(EXT)
+	$(COMPILER) build -o $(BIN_DIR)$(NAME) $(SRC_DIR)$(NAME).$(EXT)
 
 docu:
 	doxygen ./doc/doxys/dox_config

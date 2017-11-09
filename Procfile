@@ -1,1 +1,1 @@
-web: src/*.go
+web: MiddleWare_NextCloud

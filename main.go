@@ -4,14 +4,16 @@ import (
 	"log"
 	"net/http"
     "time"
+	"os"
 )
 
 func main() {
 
 	router := MyRouter()
+	port := ":" + os.Getenv("PORT")
 
     server := &http.Server{
-    	Addr:           ":5000",
+    	Addr:           port,
     	Handler:        router,
     	ReadTimeout:    10 * time.Second,
     	WriteTimeout:   10 * time.Second,
