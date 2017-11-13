@@ -13,7 +13,7 @@ EXT = go # pueden ser go
 
 ###############################################################################
 # Nombre del programa Principal
-NAME = *
+NAME = MiddleWare_NextCloud
 
 ###############################################################################
 # Comando para eliminar los ficheros
@@ -32,10 +32,13 @@ makedir:
 	mkdir ./$(BIN_DIR)
 
 run:
-	$(COMPILER) run $(SRC_DIR)$(NAME).$(EXT)
+	$(COMPILER) run $(SRC_DIR)*.$(EXT)
 
 build: clean makedir
-	$(COMPILER) build -o $(BIN_DIR)$(NAME) $(SRC_DIR)$(NAME).$(EXT)
+	$(COMPILER) build -o $(BIN_DIR)$(NAME) $(SRC_DIR)*.$(EXT)
+
+tests: clean
+	$(COMPILER) test $(SRC_DIR)*_test.$(EXT)
 
 docu:
 	doxygen ./doc/doxys/dox_config
@@ -48,7 +51,7 @@ touch:
 
 help:
 	@echo "Available targets:"
-	@echo "- run       Run Application whitout compile"
+	@echo "- run         Run Application whitout compile"
 	@echo "- build       Generate bin file on directory $(BIN_DIR)"
 	@echo "- clean       Clean up the source directory $(SRC_DIR) and bin directory $(BIN_DIR)"
 	@echo "- test        Run tests"
