@@ -1,6 +1,6 @@
 # MiddleWare for NextCloud Platform
 
-[![Build Status](https://travis-ci.org/elsudano/MiddleWare_ownCloud.svg?branch=master)](https://travis-ci.org/elsudano/MiddleWare_ownCloud)
+[![Build Status](https://travis-ci.org/elsudano/MiddleWare_NextCloud.svg?branch=master)](https://travis-ci.org/elsudano/MiddleWare_NextCloud)
 [![Code Climate](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/gpa.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
 [![Test Coverage](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/coverage.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/coverage)
 [![Issue Count](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/issue_count.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
@@ -17,6 +17,11 @@
 
 
 ## Tests, Intalación y ejecución
+
+## Despliegue
+Para realizar el despliegue de la aplicación simplemente se ha unido la cuenta de Heroku con la cuenta de Github para que se realicen los despliegues automáticos.
+
+Esto simplemente hay que habilitarlo desde el panel de control del usuario de Heroku, en las settings de la propia aplicación que se ha creado para el despliegue
 
 Despliegue https://middleware-nextcloud.herokuapp.com/
 
