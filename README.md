@@ -1,9 +1,9 @@
 # MiddleWare for NextCloud Platform
 
 [![Build Status](https://travis-ci.org/elsudano/MiddleWare_NextCloud.svg?branch=master)](https://travis-ci.org/elsudano/MiddleWare_NextCloud)
-[![Code Climate](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/gpa.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
-[![Test Coverage](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/coverage.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/coverage)
-[![Issue Count](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud/badges/issue_count.svg)](https://codeclimate.com/github/elsudano/MiddleWare_ownCloud)
+[![Code Climate](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/badges/gpa.svg)](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud)
+[![Test Coverage](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/badges/coverage.svg)](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/coverage)
+[![Issue Count](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/badges/issue_count.svg)](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud)
 
 <p>Aplicación que pretende ser un paso intermedio para futuras aplicaciones de consulta rápida a la estructura ya montado de NextCloud</p>
 
@@ -18,12 +18,19 @@
 
 ## Tests, Intalación y ejecución
 
-## Despliegue
+## Despliegue en PaaS
 Para realizar el despliegue de la aplicación simplemente se ha unido la cuenta de Heroku con la cuenta de Github para que se realicen los despliegues automáticos.
 
 Esto simplemente hay que habilitarlo desde el panel de control del usuario de Heroku, en las settings de la propia aplicación que se ha creado para el despliegue
 
 Despliegue https://middleware-nextcloud.herokuapp.com/
+
+## Despliegue en Docker
+Para poder realizar el despliegue de la aplicación se realiza en el proveedor [Zeit.com](Zeit.com)
+
+Contenedor https://middlewarenextcloud-onimeosalb.now.sh
+
+El fichero dockerfile https://hub.docker.com/r/elsudano/middleware_nextcloud/ se sube al repositorio publico de Docker Hub para que sea accesible en cualquier momento.
 
 ## Sistemas de Integración Continua
 

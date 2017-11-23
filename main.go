@@ -8,10 +8,8 @@ import (
 )
 
 func main() {
-
 	router := MyRouter()
 	port := ":" + os.Getenv("PORT")
-
     server := &http.Server{
     	Addr:           port,
     	Handler:        router,
