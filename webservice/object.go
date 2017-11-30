@@ -1,4 +1,4 @@
-package MiddleWare_NextCloud
+package webservice
 
 // Status este es un tipo de objeto especifico que se utiliza para
 // realizar un test de disponibilidad del webservice.

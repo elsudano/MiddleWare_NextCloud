@@ -34,8 +34,8 @@ notifications:
 # flunk the build and immediately stop. It's sorta like having
 # set -e enabled in bash.
 before_script:
-  - GO_FILES=$(find . -iname '*.go' -type f | grep -v /vendor/) # All the .go files, excluding vendor/
-  - go vet $GO_FILES
+  - go vet main.go
+  - go vet ./webservice/
 
 # script always run to completion (set +e). All of these code checks are must haves
 # in a modern Go project.
@@ -44,4 +44,4 @@ script:
   #- test -z $(gofmt -s -l $GO_FILES)         # Fail if a .go file hasn't been formatted with gofmt
 
 after_script:
-  - curl -k --header "cache-control=no-cache" --header "content-type=application/xml" --header 'charset=utf-8' -u $USERPASS_NEXTCLOUD "https://www.sudano.net/nextcloud/remote.php/dav/calendars/veridata/personal/" -X PROPFIND
+  - curl -k --header "cache-control=no-cache" --header "content-type=application/xml" --header 'charset=utf-8' -u $USER_NEXTCLOUD:$PASS_NEXTCLOUD $URL_BASE -X PROPFIND

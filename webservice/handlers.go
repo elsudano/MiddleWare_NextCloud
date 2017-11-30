@@ -1,16 +1,22 @@
-package MiddleWare_NextCloud
+package webservice
 
 import (
 	"encoding/json"
     "os"
+	"fmt"
 	"net/http"
 	"crypto/tls"
 
 	"github.com/gorilla/mux"
 )
 
+// DEBUG es una constante que indica que se activa el modo depuración
+// a lo largo de todo el codigo hay diferentes mensajes de pantalla
+// para poder realizar un rustico depurado de la aplicación.
+const DEBUG bool = true
+
 // Esta es la dirección URL donde tenemos alojado nuestro servidor de NextCloud.
-// 
+//
 // Para realizar el despliegue automatico tenemos que tener en cuenta que debe
 // haber una variable de entorno que se llame URL_BASE y que indique cual es
 // la URL a donde se realizaran las peticiones para NextCloud.
@@ -48,12 +54,14 @@ var NET_CLIENT = &http.Client{
 // tiene nuestro webservice, siempre respondera de la misma manera,
 // con un JSON con un campo status = OK.
 func FStatus(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(DEBUG)
     status := Status{Status: "OK"}
     json.NewEncoder(w).Encode(status)
 }
 
 // FList funcion que se encarga de
 func FList(w http.ResponseWriter, r *http.Request) {
+
 	req, err := http.NewRequest(METHOD, URL_BASE, nil)
 	if err != nil {
 		panic(err)

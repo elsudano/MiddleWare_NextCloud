@@ -1,4 +1,4 @@
-package MiddleWare_NextCloud
+package webservice
 
 import (
     "net/http"

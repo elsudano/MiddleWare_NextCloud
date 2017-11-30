@@ -42,7 +42,7 @@ build: clean makedir
 	$(COMPILER) build -o $(BIN_DIR)$(NAME) $(SRC_DIR)*.$(EXT)
 
 deploy: clean
-	$(NOW_COMMAND) -e PORT=$(echo $PORT) -e URL_BASE=$(echo $URL_BASE) -e USER_NEXTCLOUD=$(echo $USER_NEXTCLOUD) -e PASS_NEXTCLOUD=$(echo $PASS_NEXTCLOUD)
+	$(NOW_COMMAND) -e PORT=$(echo $PORT) -e URL_BASE=$(echo $URL_BASE) -e USER_NEXTCLOUD=$(echo $USER_NEXTCLOUD) -e PASS_NEXTCLOUD=$(echo $PASS_NEXTCLOUD) --public
 
 tests: clean
 	$(COMPILER) test $(SRC_DIR)*_test.$(EXT)
