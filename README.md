@@ -1,7 +1,7 @@
 # MiddleWare for NextCloud Platform
 
 [![Build Status](https://travis-ci.org/elsudano/MiddleWare_NextCloud.svg?branch=master)](https://travis-ci.org/elsudano/MiddleWare_NextCloud)
-[![Code Climate](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/badges/gpa.svg)](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud)
+[![Maintainability](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/badges/maintainability.svg)](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/maintainability)
 [![Test Coverage](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/badges/coverage.svg)](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/coverage)
 [![Issue Count](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud/badges/issue_count.svg)](https://codeclimate.com/github/elsudano/MiddleWare_NextCloud)
 
