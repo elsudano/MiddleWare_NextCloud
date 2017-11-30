@@ -12,6 +12,10 @@ BIN_DIR = bin/
 EXT = go # pueden ser go
 
 ###############################################################################
+# ruta del comando cliente para el despliegue en Zeit.co
+NOW_COMMAND = /home/usuario/now-linux
+
+###############################################################################
 # Nombre del programa Principal
 NAME = MiddleWare_NextCloud
 
@@ -37,6 +41,9 @@ run:
 build: clean makedir
 	$(COMPILER) build -o $(BIN_DIR)$(NAME) $(SRC_DIR)*.$(EXT)
 
+deploy: clean
+	$(NOW_COMMAND) -e PORT=$(echo $PORT) -e URL_BASE=$(echo $URL_BASE) -e USER_NEXTCLOUD=$(echo $USER_NEXTCLOUD) -e PASS_NEXTCLOUD=$(echo $PASS_NEXTCLOUD)
+
 tests: clean
 	$(COMPILER) test $(SRC_DIR)*_test.$(EXT)
 
@@ -53,6 +60,7 @@ help:
 	@echo "Available targets:"
 	@echo "- run         Run Application whitout compile"
 	@echo "- build       Generate bin file on directory $(BIN_DIR)"
+	@echo "- deploy       Execute now for deploy on Zeit.co"
 	@echo "- clean       Clean up the source directory $(SRC_DIR) and bin directory $(BIN_DIR)"
 	@echo "- test        Run tests"
 	@echo "- help        This info"

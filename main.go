@@ -1,4 +1,4 @@
-package main
+package MiddleWare_NextCloud
 
 import (
 	"log"

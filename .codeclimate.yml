@@ -1,5 +1,6 @@
 languages:
-  Python: true
+  GO: true
 exclude_paths:
-- "telegram/emoji.py"
-- "tests/*"
+- "doc/"
+- "Godeps/"
+- "vendor/*"

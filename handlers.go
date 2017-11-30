@@ -1,4 +1,4 @@
-package main
+package MiddleWare_NextCloud
 
 import (
 	"encoding/json"
@@ -8,9 +8,34 @@ import (
 
 	"github.com/gorilla/mux"
 )
-// Variables de configuración
-var URL_BASE = "https://www.sudano.net/nextcloud/remote.php/dav/calendars/prueba/personal/"
-var METHOD = "PROPFIND" // PROPFIND, GET
+
+// Esta es la dirección URL donde tenemos alojado nuestro servidor de NextCloud.
+// 
+// Para realizar el despliegue automatico tenemos que tener en cuenta que debe
+// haber una variable de entorno que se llame URL_BASE y que indique cual es
+// la URL a donde se realizaran las peticiones para NextCloud.
+var URL_BASE = os.Getenv("URL_BASE")
+
+// Esta variable se usa para saber cual será el metodo por defecto que
+// se utilizará para realizar las peticiones a NextCloud.
+//
+// Entre las opciones que tenemos destacan:
+//
+// PROPFIND, GET
+//
+// Las demas opciones las podemos ver en la documentación de NextCloud.
+// https://docs.nextcloud.com/server/12/developer_manual/client_apis/WebDAV/index.html
+var METHOD = "PROPFIND"
+
+// Como estamos desarrollando una API que se encaga de comunicarnos con
+// NextCloud, y la propia API de NextCloud se accede a través de un cliente
+// web necesitamos generar un cliente en nuestra API para poder realizar
+// las peticiones.
+//
+// Por eso con esta variable creamos un cliente el cual nos permite realizar
+// peticiones sobre paginas https pero sin la necesidad de la verificaión
+// del certificado de la pagina, esto se hace por si la pagina tiene un
+// certificado auto-firmado.
 var NET_CLIENT = &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
@@ -19,13 +44,15 @@ var NET_CLIENT = &http.Client{
 		},
 }
 
-// se llama cuando se accede a "/status" o a "/"
+// FStatus función que se encarga de responder a la disponibilidad que
+// tiene nuestro webservice, siempre respondera de la misma manera,
+// con un JSON con un campo status = OK.
 func FStatus(w http.ResponseWriter, r *http.Request) {
     status := Status{Status: "OK"}
     json.NewEncoder(w).Encode(status)
 }
 
-// se llama cuando se accede a "/list"
+// FList funcion que se encarga de
 func FList(w http.ResponseWriter, r *http.Request) {
 	req, err := http.NewRequest(METHOD, URL_BASE, nil)
 	if err != nil {
