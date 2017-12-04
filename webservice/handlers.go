@@ -1,11 +1,13 @@
 package webservice
 
 import (
-	"encoding/json"
-    "os"
-	"fmt"
-	"net/http"
 	"crypto/tls"
+	"encoding/json"
+	"encoding/xml"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -13,7 +15,7 @@ import (
 // DEBUG es una constante que indica que se activa el modo depuración
 // a lo largo de todo el codigo hay diferentes mensajes de pantalla
 // para poder realizar un rustico depurado de la aplicación.
-const DEBUG bool = true
+const DEBUG bool = false
 
 // Esta es la dirección URL donde tenemos alojado nuestro servidor de NextCloud.
 //
@@ -43,53 +45,122 @@ var METHOD = "PROPFIND"
 // del certificado de la pagina, esto se hace por si la pagina tiene un
 // certificado auto-firmado.
 var NET_CLIENT = &http.Client{
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
+	Transport: &http.Transport{
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true,
 		},
+	},
 }
 
 // FStatus función que se encarga de responder a la disponibilidad que
 // tiene nuestro webservice, siempre respondera de la misma manera,
 // con un JSON con un campo status = OK.
 func FStatus(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(DEBUG)
-    status := Status{Status: "OK"}
-    json.NewEncoder(w).Encode(status)
+	if DEBUG {
+		fmt.Println("Acabamos de realizar la peticion del status")
+	}
+	status := Status{Status: "OK"}
+	json.NewEncoder(w).Encode(status)
 }
 
 // FList funcion que se encarga de
 func FList(w http.ResponseWriter, r *http.Request) {
-
-	req, err := http.NewRequest(METHOD, URL_BASE, nil)
+	if DEBUG {
+		fmt.Println("Hacemos la peticion de la lista")
+		fmt.Println("La URL es: " + URL_BASE)
+	}
+	peticion, err := http.NewRequest(METHOD, URL_BASE, nil)
 	if err != nil {
+		if DEBUG {
+			fmt.Println("Este es el error de no encuentro la URL")
+		}
 		panic(err)
 	}
-	req.SetBasicAuth(os.Getenv("USER_NEXTCLOUD"), os.Getenv("PASS_NEXTCLOUD"))
-	req.Header.Set("Cache-Control", "no-cache")
-	req.Header.Set("Content-Type", "application/xml")
-	req.Header.Set("Charset", "utf-8")
+	peticion.SetBasicAuth(os.Getenv("USER_NEXTCLOUD"), os.Getenv("PASS_NEXTCLOUD"))
+	peticion.Header.Set("Cache-Control", "no-cache")
+	peticion.Header.Set("Content-Type", "application/xml")
+	peticion.Header.Set("Charset", "utf-8")
 
-	resp, err := NET_CLIENT.Do(req)
+	respuesta, err := NET_CLIENT.Do(peticion)
 	if err != nil {
+		if DEBUG {
+			fmt.Println("Este es el error de que no tiene usuario ni pass")
+		}
 		panic(err)
 	}
-	// objects := Objects{
-	// 	Object{Name: "Write presentation"},
-	// 	Object{Name: "Host meetup"},
-	// }
-	if err := json.NewEncoder(w).Encode(resp); err != nil {
-		panic(err)
+
+	if respuesta.StatusCode == http.StatusMultiStatus {
+		bodyRaw, err := ioutil.ReadAll(respuesta.Body)
+		//bodyString := string(bodyRaw)
+		//fmt.Println("Resultado de la peticion a la WEB\n" + bodyString)
+		if err != nil {
+			if DEBUG {
+				fmt.Println("Error en pasar la respuesta a string")
+			}
+			panic(err)
+		}
+
+		// Esta es la estructura de XML que vamos a usar para almacenar
+		// temporalmente los datos
+		var xmlData Multistatus
+		// Esta es la estructura de datos que vamos a enviar en formato
+		// JSON al cliente, es una colección de objetos de JSON
+		var responseJSON []JSONObject
+		// Este es un evento de calandario en formato JSON
+		var eventJSON JSONObject
+
+		// en esta linea montamos un xml para luego poder navegar por el
+		if err := xml.Unmarshal(bodyRaw, &xmlData); err != nil {
+			fmt.Println("Este error es del XML decodificando")
+			panic(err)
+		}
+		// con esto recorremos todo el XML
+		for _, respTag := range xmlData.Responses {
+			eventJSON = JSONObject{
+				Id:       respTag.Propstat[0].Prop.Etag,
+				Href:     respTag.Href,
+				Name:     respTag.Propstat[0].Prop.Name,
+				Modified: respTag.Propstat[0].Prop.Modified,
+			}
+			responseJSON = append(responseJSON, eventJSON)
+			// con esto imprimimos por consola el resultado de XML
+			if DEBUG {
+				fmt.Println("URL: ", respTag.Href)
+				for _, propstatTag := range respTag.Propstat {
+					fmt.Println("\tStatus: ", propstatTag.Status)
+					fmt.Println("\tName: ", propstatTag.Prop.Name)
+					fmt.Println("\tContent-Type: ", propstatTag.Prop.Content_Type)
+					fmt.Println("\tSize: ", propstatTag.Prop.Size)
+					fmt.Println("\tModified: ", propstatTag.Prop.Modified)
+					fmt.Println("\tEtag: ", propstatTag.Prop.Etag)
+					for _, propTag := range propstatTag.Prop.PropList {
+						fmt.Println("\t\tXMLName:", propTag.XMLName, "->", propTag.Value)
+					}
+					fmt.Println()
+				}
+				fmt.Println()
+			}
+		}
+		// Con esto rellenamos el JSON que vamos a devolver al cliente
+		if err := json.NewEncoder(w).Encode(responseJSON); err != nil {
+			if DEBUG {
+				fmt.Println("Este error es del JSON")
+			}
+			panic(err)
+		}
+	} else {
+		if DEBUG {
+			fmt.Println("El codigo de estado para la respuesta es:", respuesta.StatusCode)
+		}
 	}
-	defer resp.Body.Close()
+	defer respuesta.Body.Close()
 }
 
 // se llama cuando se accede a "/show/{id}"
 func FShow(w http.ResponseWriter, r *http.Request) {
-    vars := mux.Vars(r)
-    Id := vars["id"]
-    json.NewEncoder(w).Encode(Id)
+	vars := mux.Vars(r)
+	Id := vars["id"]
+	json.NewEncoder(w).Encode(Id)
 }
 
 // se llama cuando se accede a "/new"
@@ -109,5 +180,5 @@ func FDelete(w http.ResponseWriter, r *http.Request) {
 
 // se llama cuando se accede a "/exit"
 func FExit(w http.ResponseWriter, r *http.Request) {
-    os.Exit(0)
+	os.Exit(0)
 }
