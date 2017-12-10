@@ -42,7 +42,7 @@ build: clean makedir
 	$(COMPILER) build -o $(BIN_DIR)$(NAME) $(SRC_DIR)*.$(EXT)
 
 deploy: clean
-	$(NOW_COMMAND) -e PORT=${PORT} -e URL_BASE=${URL_BASE} -e USER_NEXTCLOUD=${USER_NEXTCLOUD} -e PASS_NEXTCLOUD=${PASS_NEXTCLOUD} --public
+	$(NOW_COMMAND) -e USER_NEXTCLOUD=${USER_NEXTCLOUD} -e PASS_NEXTCLOUD=${PASS_NEXTCLOUD} -e DOMAIN=${DOMAIN} -e URL_BASE=${URL_BASE} -e PORT=${PORT} --public
 
 cleandeploy: clean
 	$(NOW_COMMAND) rm $(NAME) -y
