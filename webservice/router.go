@@ -17,7 +17,6 @@ import (
 // implementado para cada una de las URLs a las que queremos dar respuesta en
 // nuestro webservice.
 func MyRouter() *mux.Router {
-
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		var handler http.Handler
@@ -29,8 +28,6 @@ func MyRouter() *mux.Router {
 			Path(route.Pattern).
 			Name(route.Name).
 			Handler(handler)
-
 	}
-
 	return router
 }
