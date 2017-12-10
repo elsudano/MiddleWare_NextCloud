@@ -68,6 +68,12 @@ var routes = Routes{
         FList,
     },
     Route{
+        "List",
+        "GET",
+        "/refresh",
+        FList,
+    },
+    Route{
         "Show",
         "GET",
         "/show/{id}",
@@ -76,7 +82,7 @@ var routes = Routes{
     Route{
         "New",
         "POST",
-        "/new",
+        "/new/{description,date,etc}",
         FNew,
     },
     Route{
