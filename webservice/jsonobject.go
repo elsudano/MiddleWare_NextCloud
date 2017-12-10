@@ -8,10 +8,15 @@ type Status struct {
 
 // JSONObject es un tipo que se encarga de almacenar los datos mas importantes
 // de la respuesta que nos da NextCloud.
-type JSONObject struct {
-	Id         string `json:"id"`
-	Name       string `json:"name"`
-    Href       string `json:"href"`
-    Modified   string `json:"last_modified"`
-	Completed  bool   `json:"completed"`
+type EventJSON struct {
+	Id           string `json:"id"`
+    Etag         string `json:"etag"`
+    Modified     string `json:"last_modified"`
+}
+
+// icsJSON es un tipo que se encarga de almacenar los datos del evento.
+type icsJSON struct {
+	Id           string `json:"id"`
+    Denomination string `json:"denomination"`
+    Description  string `json:"description"`
 }
