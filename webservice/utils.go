@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	//"github.com/apognu/gocal"
+	"github.com/apognu/gocal"
 )
 
 // Como estamos desarrollando una API que se encaga de comunicarnos con
@@ -98,7 +98,9 @@ func readXML() Multistatus {
 //
 // Para que se pueda realizar cualquier operación con el fichero descargado
 // se devuelve una cadena y de esa manera se puede parsear o guardar.
-func readICS(JSONstruct icsJSON, icsFILE string) string {
+func readICS(icsFILE string) icsJSON {
+	// esta es la información que devolvemos
+	var JSONstruct icsJSON
 	if DEBUG {
 		fmt.Println("El evento es: " + icsFILE)
 	}
@@ -129,26 +131,49 @@ func readICS(JSONstruct icsJSON, icsFILE string) string {
 		panic(err)
 	}
 	// Creamos el fichero temporal
-	tmpfile, err := ioutil.TempFile("", "vevent")
+	tmpfile, err := ioutil.TempFile("", "ics-tmp-json-")
 	if err != nil {
 		panic(err)
 	}
-	defer os.Remove(tmpfile.Name()) // lo preparamos para ser borrado
 	// Escribimos en el fichero temporal el que nos descargamos
 	if _, err := tmpfile.Write(fileRaw); err != nil {
 		panic(err)
 	}
-	// Leemos el fichero temporal
-	tmpcontent, err := ioutil.ReadFile(tmpfile.Name())
-	if err != nil {
-		panic(err)
+	// ponemos la posicion de lectura al principio del fichero
+	tmpfile.Seek(0, 0)
+	// ponemos el fichero en un calendario
+	calendar := gocal.NewParser(tmpfile)
+	calendar.Parse()
+	// si el fichero es un evento solo tendrá 1 elemento
+	if len(calendar.Events) == 1 {
+		event := calendar.Events[0]
+		JSONstruct = icsJSON {
+			Id: event.Uid,
+			Denomination: event.Summary,
+			Description: event.Description,
+			Start: event.Start.String(),
+			End: event.End.String(),
+		}
+		if DEBUG {
+			fmt.Println(calendar.Events[0].Uid)
+			fmt.Println(calendar.Events[0].Summary)
+			fmt.Println(calendar.Events[0].Description)
+		}
+	// si el fichero es un calendario tendrá varios elementos
+	} else if len(calendar.Events) > 1 {
+		for _, event := range calendar.Events {
+			if DEBUG {
+				fmt.Printf("%s on %s by %s", event.Summary, event.Start.String(), event.Organizer.Cn)
+			}
+		}
 	}
 	// Cerramos el fichero temporal para que se borre
 	if err := tmpfile.Close(); err != nil {
 		panic(err)
 	}
+	defer os.Remove(tmpfile.Name()) // lo preparamos para ser borrado
 	defer respuesta.Body.Close()
-	return string(tmpcontent)
+	return JSONstruct
 }
 
 // print

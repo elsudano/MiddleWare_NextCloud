@@ -19,4 +19,6 @@ type icsJSON struct {
 	Id           string `json:"id"`
     Denomination string `json:"denomination"`
     Description  string `json:"description"`
+    Start        string `json:"start"`
+    End          string `json:"end"`
 }

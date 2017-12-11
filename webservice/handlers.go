@@ -80,9 +80,13 @@ func FShow(w http.ResponseWriter, r *http.Request) {
 	// con esto recorremos todo el XML
 	for i , respTag := range xmlData.Responses {
 		if i != 0 && strings.TrimSuffix(strings.TrimPrefix(respTag.Href, URL_BASE+"Nextcloud-"), ".ics") == Id {
-			stringICS := readICS(eventJSON, URL_COMPLETE_PATH + "Nextcloud-" + Id + ".ics")
+			// guardamos el evento en su structura que devolvemos
+			eventJSON = readICS(URL_COMPLETE_PATH + "Nextcloud-" + Id + ".ics")
+			// esto lo hacemos para mantener el mismo Id que sale en la lista
+			// en NextCloud se utilizan diferentes IDs para gestionar mas cosas
+			eventJSON.Id = Id
 			if DEBUG {
-				fmt.Println("Este es el contenido del fichero ICS\n", stringICS)
+				fmt.Println("Este es el contenido del fichero ICS\n", eventJSON)
 			}
 		}
 	}
