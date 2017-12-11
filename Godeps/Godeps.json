@@ -4,6 +4,14 @@
 	"GodepVersion": "v79",
 	"Deps": [
 		{
+			"ImportPath": "github.com/apognu/gocal",
+			"Rev": "5f24edc4a5df8f48512cbbb93e28e33e1612bbc6"
+		},
+		{
+			"ImportPath": "github.com/apognu/gocal/parser",
+			"Rev": "5f24edc4a5df8f48512cbbb93e28e33e1612bbc6"
+		},
+		{
 			"ImportPath": "github.com/gorilla/mux",
 			"Comment": "v1.5.0-6-g7625a85",
 			"Rev": "7625a85c14e615274a4ee4bc8654f72310a563e4"
