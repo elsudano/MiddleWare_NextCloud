@@ -16,6 +16,20 @@ EXT = go # pueden ser go
 NOW_COMMAND = /home/usuario/now-linux
 
 ###############################################################################
+# Cliente web para linea de comandos
+WEBCLI = curl
+
+###############################################################################
+# Cliente web para linea de comandos
+WEBSRV = localhost:# pruebas en local
+#WEBSRV = https://${DOMAIN}${URL_BASE}:#Pruebas en remoto
+
+###############################################################################
+# Cabeceras y metodos las peticiones de http que son solicitudes
+ID = KJ43MS30MEJQIR6ULBI0U9 # se pasa por parametros para sobreescribir esta variable
+STRING2 = -d '{"id":"", "denomination":"Prueba nueva", "description":"esta es una prueba de addición de evento", "reminders":[{"id":"1", "denomination":"Primer recordatorio", "datestart":"2017/12/10","timestart":"20:00"}], "datestart":"2017/12/10", "dateend":"2017/12/10", "timestart":"22:00","timeend":"23:00"}' --header "Content-Type: application/json" -X POST
+
+###############################################################################
 # Nombre del programa Principal
 NAME = MiddleWare_NextCloud
 
@@ -49,6 +63,21 @@ cleandeploy: clean
 
 tests: clean
 	$(COMPILER) test $(SRC_DIR)*_test.$(EXT)
+
+test_list: clean
+	$(WEBCLI) $(WEBSRV)${PORT}/list | jq
+
+test_show: clean
+	$(WEBCLI) $(WEBSRV)${PORT}/show/$(ID) | jq
+
+test_new: clean
+	$(WEBCLI) $(WEBSRV)${PORT}/new $(STRING2)
+
+test_update: clean
+	$(WEBCLI) $(WEBSRV)${PORT}/update $(ID)
+
+test_delete: clean
+	$(WEBCLI) $(WEBSRV):${PORT}/delete $(STRING1)
 
 docu:
 	doxygen ./doc/doxys/dox_config
