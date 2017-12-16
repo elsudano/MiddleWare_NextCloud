@@ -41,8 +41,8 @@ var xmlData = readXML()
 // estructuras que se han definido en el fichero xmlobject.go
 func readXML() Multistatus {
 	if DEBUG {
-		fmt.Println("Hacemos la peticion de la lista")
-		fmt.Println("La URL Completa es: " + URL_COMPLETE_PATH)
+		fmt.Println("Se recarga la base de datos")
+		fmt.Printf("La URL Completa es: %s\n", URL_COMPLETE_PATH)
 	}
 	// Esta es la estructura de XML que vamos a usar para almacenar
 	// temporalmente los datos
@@ -87,7 +87,7 @@ func readXML() Multistatus {
 			panic(err)
 		}
 	} else if DEBUG {
-		fmt.Println("El codigo de estado para la respuesta es:", respuesta.StatusCode)
+		fmt.Printf("El codigo de estado para la respuesta es: %s", respuesta.StatusCode)
 	}
 	defer respuesta.Body.Close()
 	return xmlData
@@ -102,7 +102,7 @@ func readICS(icsFILE string) icsJSON {
 	// esta es la información que devolvemos
 	var JSONstruct icsJSON
 	if DEBUG {
-		fmt.Println("El evento es: " + icsFILE)
+		fmt.Printf("El evento es: %s\n", icsFILE)
 	}
 	// se almacena la petición que se realiza a la URL_COMPLETE_PATH y
 	// un err por si falla la petición
@@ -130,6 +130,9 @@ func readICS(icsFILE string) icsJSON {
 	if err != nil {
 		panic(err)
 	}
+	if DEBUG {
+		fmt.Printf("Esto es fileRaw:\n%s\n", fileRaw)
+	}
 	// Creamos el fichero temporal
 	tmpfile, err := ioutil.TempFile("", "ics-tmp-json-")
 	if err != nil {
@@ -151,8 +154,13 @@ func readICS(icsFILE string) icsJSON {
 			Id: event.Uid,
 			Denomination: event.Summary,
 			Description: event.Description,
-			Start: event.Start.String(),
-			End: event.End.String(),
+			// Para entender por que hay que poner esos parametros en el formato
+			// revisar la documentación en:
+			// https://golang.org/src/time/format.go
+			DateStart: event.Start.Format("2006/01/02"),
+			DateEnd: event.End.Format("2006/01/02"),
+			TimeStart: event.Start.Format("15:04:05"),
+			TimeEnd: event.End.Format("15:04:05"),
 		}
 		if DEBUG {
 			fmt.Println(calendar.Events[0].Uid)
