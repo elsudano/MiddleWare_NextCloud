@@ -87,7 +87,7 @@ func readXML() Multistatus {
 			panic(err)
 		}
 	} else if DEBUG {
-		fmt.Printf("El codigo de estado para la respuesta es: %s", respuesta.StatusCode)
+		fmt.Printf("El codigo de estado para la respuesta es: %d\n", respuesta.StatusCode)
 	}
 	defer respuesta.Body.Close()
 	return xmlData

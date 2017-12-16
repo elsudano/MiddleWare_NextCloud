@@ -11,7 +11,7 @@ type Status struct {
 type EventJSON struct {
 	Id       string `json:"id"`
 	Etag     string `json:"etag"`
-	Modified string `json:"last_modified"` // formatear la fecha para que sea YYYY/MM/DD HH:MM
+	Modified string `json:"last_modified"`
 }
 
 // Reminder es un tipo que se encarga de almacenar los datos de los Recordatorios
