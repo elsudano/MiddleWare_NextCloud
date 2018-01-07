@@ -53,7 +53,7 @@ Para conseguir todas estas o casi todos estos valores de las variables tenemos q
 
 Después de esto tenemos que listar nuestra subscripción para eso ejecutaremos el comando `az account list --query "[?isDefault].id" -o json` el cual nos dará el ID de la subscripción.
 
-Ahora ya podemos generar nuestro fichero de configuración de Vagrant o bien con el comando `vagrant init` o bien generandolo a mano tal y como se ha realizado en el fichero [Vagrant](https://raw.githubusercontent.com/elsudano/MiddleWare_NextCloud/master/Vagrant)
+Ahora ya podemos generar nuestro fichero de configuración de Vagrant o bien con el comando `vagrant init` o bien generandolo a mano tal y como se ha realizado en el fichero [Vagrant](https://github.com/elsudano/MiddleWare_NextCloud/blob/master/Vagrantfile)
 
 ## Sistemas de Integración Continua
 

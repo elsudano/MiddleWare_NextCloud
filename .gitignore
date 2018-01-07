@@ -5,6 +5,8 @@ bin/*
 docs/*
 examples/*
 .github/*
+.vagrant/*
+.extras/*
 tests/*
 LICENCE.lesser
 MANIFEST.in
