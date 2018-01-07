@@ -1,0 +1,5 @@
+- hosts: all
+    remote_user: vagrant
+    tasks:
+        - name: Instalar Middleware
+            command: go get github.com/elsudano/MiddleWare_NextCloud
