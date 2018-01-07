@@ -32,6 +32,29 @@ Contenedor https://middlewarenextcloud-onimeosalb.now.sh
 
 El fichero dockerfile https://hub.docker.com/r/elsudano/middleware_nextcloud/ se sube al repositorio publico de Docker Hub para que sea accesible en cualquier momento.
 
+## Despliegue con Vagrant y Ansible
+Antes de poder realizar cualquier despliegue con Vagrant hace falta que tengamos en nuestro repositorio de boxes la maquina base con la cual vamos a empezar a trabajar, para ello tenemos que ejecutar el siguiente comando: `vagrant box add <PATH, URL>`.
+
+En este comando podemos especificar una ruta completa de nuestro ordenador para que Vagrant importe dicha *imagen* o bien podemos usar una ya creada, de las muchas que se encuentran en nuestro proveedor de azure.
+
+Para poder realizar el despliegue de la aplicación es necesario instalar los providers necesarios, para ello utilizaremos el comando: `vagrant plugin install <provider>` en nuestro caso tenemos que usar como prividers, **azure** y **vmware_workstation**
+
+Después de realizar esto nos aseguraremos que tenemos todas las variables de entorno correctas para poder desplegar en Azure.
+
+- AZURE_APPID = Hash de ID de subscripción
+- AZURE_PASSWORD = Hash de contraseña de subscripción
+- AZURE_SUBSCRIPTION = Variable de Subscripción de Azure
+- AZURE_TENANT = Variable del servidor de Dominio para Azure
+- AZURE_VM_PASS = Contraseña de la MV
+- AZURE_DISPLAYNAME = Nombre Visible de la Conexión
+- AZURE_NAME = Nombre de la conexión
+
+Para conseguir todas estas o casi todos estos valores de las variables tenemos que crear nuestro Active Directory en Azure para eso ejecutamos `az ad sp create-for-rbac -o json`, y eso nos dará algunas respuestas.
+
+Después de esto tenemos que listar nuestra subscripción para eso ejecutaremos el comando `az account list --query "[?isDefault].id" -o json` el cual nos dará el ID de la subscripción.
+
+Ahora ya podemos generar nuestro fichero de configuración de Vagrant o bien con el comando `vagrant init` o bien generandolo a mano tal y como se ha realizado en el fichero [Vagrant](https://raw.githubusercontent.com/elsudano/MiddleWare_NextCloud/master/Vagrant)
+
 ## Sistemas de Integración Continua
 
 Se usará el sistema de integración continua TRAVIS.CI para poder testear de manera fácil y con los menos errores posibles el MiddleWare que se encargara de realizar conexiones con un servidor de Owncloud.
