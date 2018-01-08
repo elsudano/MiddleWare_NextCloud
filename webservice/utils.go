@@ -73,7 +73,7 @@ func readXML() Multistatus {
 	}
 	// normalmente en los WebDAV el estado devuelto suele ser MultiEstado
 	// en http://sabre.io/dav/building-a-caldav-client/ se puede ver
-	if respuesta.StatusCode == http.StatusMultiStatus {
+	if respuesta.StatusCode == 207 {
 		bodyRaw, err := ioutil.ReadAll(respuesta.Body)
 		if err != nil {
 			if DEBUG {
