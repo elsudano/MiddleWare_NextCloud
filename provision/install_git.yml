@@ -1,5 +1,0 @@
-- hosts: all
-    remote_user: vagrant
-    tasks:
-        - name: Instalar Git
-            command: sudo apt-get -y install git

@@ -1,5 +1,0 @@
-- hosts: all
-    remote_user: vagrant
-    tasks:
-        - name: Actualizacion
-            command: sudo apt-get update

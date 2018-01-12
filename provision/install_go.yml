@@ -1,9 +1,0 @@
--hosts: all
-    remote_user: vagrant
-    tasks:
-        -name: Instalar GoLang
-            command: sudo apt -y install golang-go
-        -name: Crear directorios de aplicación
-            command: export GOPATH="/home/$USER/go"
-        -name: Asignar variables de entorno
-            command: export GOPATH="/home/$USER/go"
