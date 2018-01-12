@@ -55,6 +55,16 @@ Después de esto tenemos que listar nuestra subscripción para eso ejecutaremos 
 
 Ahora ya podemos generar nuestro fichero de configuración de Vagrant o bien con el comando `vagrant init` o bien generandolo a mano tal y como se ha realizado en el fichero [Vagrant](https://github.com/elsudano/MiddleWare_NextCloud/blob/master/Vagrantfile)
 
+Una vez que le despliegue de la maquina virtual se lleva a cabo se utiliza ansible para poder configurar la aplicación que queremos ejecutar en dicha maquina, osea tendriamos que configurar las diferentes variables de entorno, programas y dependencias de nuestra aplicación, por ejemplo si necesitamos que nuestra aplicación funcione en un apache se tiene que configurar desde aquí, para ello usamos el [fichero Ansible](https://github.com/elsudano/MiddleWare_NextCloud/blob/master/provision/tasks.yml) para describir nuestro entorno de despliegue.
+
+Y por ultimo utilizaremos Fabric para controlar la aplicación final tal y como se muestra en el [fichero Fabfile](https://github.com/elsudano/MiddleWare_NextCloud/blob/master/despliegue/fabfile.py)
+
+Para comprobar todos los comandos que podemos usar con Fabric ejecutamos: `fab --list` en el mismo directorio donde se encuentra el fichero fabfile
+
+Para poder comprobar que la aplicación funciona correctamente se accederá a la siguiente dirección:
+
+Despliegue final: middleware.westeurope.cloudapp.azure.com
+
 ## Sistemas de Integración Continua
 
 Se usará el sistema de integración continua TRAVIS.CI para poder testear de manera fácil y con los menos errores posibles el MiddleWare que se encargara de realizar conexiones con un servidor de Owncloud.
