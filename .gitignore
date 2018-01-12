@@ -22,6 +22,7 @@ lib/
 lib64/
 var/
 .installed.cfg
+*.pyc
 
 # Unit test / coverage reports
 htmlcov/
