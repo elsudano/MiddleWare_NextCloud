@@ -61,6 +61,10 @@ Y por ultimo utilizaremos Fabric para controlar la aplicación final tal y como 
 
 Para comprobar todos los comandos que podemos usar con Fabric ejecutamos: `fab --list` en el mismo directorio donde se encuentra el fichero fabfile
 
+Para desplegar la aplicación utilizamos el comando: `fab -f despliegue/fabfile.py deploy`
+
+Para eliminar la aplicación utilizamos el comando: `fab -f despliegue/fabfile.py undeploy`
+
 Para poder comprobar que la aplicación funciona correctamente se accederá a la siguiente dirección:
 
 Despliegue final: middleware.westeurope.cloudapp.azure.com
