@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	//"io/ioutil"
+	"io/ioutil"
 	"strings"
 	"github.com/gorilla/mux"
 )
@@ -178,6 +178,27 @@ func FDelete(w http.ResponseWriter, r *http.Request) {
 func FRefresh(w http.ResponseWriter, r *http.Request) {
 	xmlData = readXML()
 }
+
+// se llama cuando se accede a "/help"
+// Muestra la información relativa al webservice
+// Toda la funcionalidad que tiene y que metodos se pueden usar
+func FHelp(w http.ResponseWriter, r *http.Request) {
+	data, err := ioutil.ReadFile(GOPATH + "/src/github.com/elsudano/MiddleWare_NextCloud/webservice/wshelp.html")
+
+    if err == nil {
+		w.Header().Set("Cache-Control", "no-cache")
+		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Charset", "utf-8")
+		w.Write(data)
+	} else {
+		if DEBUG {
+			fmt.Println("Error en la lectura:", err)
+		}
+	    w.WriteHeader(404)
+	    w.Write([]byte(http.StatusText(404)))
+	}
+}
+
 // se llama cuando se accede a "/exit"
 func FExit(w http.ResponseWriter, r *http.Request) {
 	os.Exit(0)
