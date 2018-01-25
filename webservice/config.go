@@ -24,6 +24,9 @@ var DOMAIN = os.Getenv("DOMAIN")
 // la URL a donde se realizaran las peticiones para NextCloud.
 var URL_BASE = os.Getenv("URL_BASE")
 
+// Esta es una variable que indica donde se encuentra el codigo fuente del programa
+var GOPATH = os.Getenv("GOPATH")
+
 // Esta es la variable que almacena la ruta completa donde se encuentra
 // el calendario a donde queremos acceder
 //
