@@ -183,7 +183,13 @@ func FRefresh(w http.ResponseWriter, r *http.Request) {
 // Muestra la información relativa al webservice
 // Toda la funcionalidad que tiene y que metodos se pueden usar
 func FHelp(w http.ResponseWriter, r *http.Request) {
-	data, err := ioutil.ReadFile(GOPATH + "/src/github.com/elsudano/MiddleWare_NextCloud/webservice/wshelp.html")
+	var data []byte
+	var err error
+	if os.Getenv("HOME") == "/app" {
+		data, err = ioutil.ReadFile("/app/webservice/wshelp.html")
+	} else {
+		data, err = ioutil.ReadFile(GOPATH + "/src/github.com/elsudano/MiddleWare_NextCloud/webservice/wshelp.html")
+	}
 
     if err == nil {
 		w.Header().Set("Cache-Control", "no-cache")
