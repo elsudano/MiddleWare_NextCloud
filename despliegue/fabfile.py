@@ -5,13 +5,16 @@ env.user = 'usuario'
 env.hosts = ['middleware.westeurope.cloudapp.azure.com']
 env.key_filename = '~/.ssh/id_rsa_deploying'
 
-def levantar_maquina():
+def _levantar_maquina():
     local('vagrant up --no-provision')
 
-def destruir_maquina():
+def _destruir_maquina_zeit():
+    local('make clean_deploy')
+
+def _destruir_maquina():
     local('vagrant destroy --force')
 
-def configurar_maquina():
+def _configurar_maquina():
     local('vagrant provision')
     local('sed "/middleware.westeurope.cloudapp.azure.com/d" ~/.ssh/known_hosts > ~/.ssh/known_hosts')
     if run('echo $DOMAIN') == '':
@@ -25,17 +28,23 @@ def configurar_maquina():
     if run('echo $PORT') == '':
         sudo('echo PORT="80"' + ' >> /etc/environment')
 
-def ejecutar_aplicacion():
-    sudo('~/go/bin/MiddleWare_NextCloud &')
+def _ejecutar_aplicacion():
+    local('make run &')
+    local('make deploy &')
+    sudo('~/go/bin/MiddleWare_NextCloud')
 
-def detener_aplicacion():
+def _detener_aplicacion():
+    local('curl http://localhost:8080/exit &')
+    local('curl https://middleware-nextcloud.herokuapp.com/exit &')
+    local('curl https://middlewarenextcloud-ovqbkksdcd.now.sh/exit &')
     local('curl http://middleware.westeurope.cloudapp.azure.com/exit &')
 
 def deploy():
-    levantar_maquina()
-    configurar_maquina()
-    ejecutar_aplicacion()
+    _levantar_maquina()
+    _configurar_maquina()
+    _ejecutar_aplicacion()
 
 def undeploy():
-    detener_aplicacion()
-    destruir_maquina()
+    _detener_aplicacion()
+    _destruir_maquina_zeit()
+    _destruir_maquina()

@@ -25,7 +25,7 @@ WEBCLI = curl
 # Configuración para las configuraciones remotas
 WEB_LOCAL_SRV = localhost:# pruebas en local
 URL_HEROKU = middleware-nextcloud.herokuapp.com
-URL_ZEIT = zeit.co
+URL_ZEIT = middlewarenextcloud-ysiglvkfgt.now.sh
 URL_AZURE = middleware.westeurope.cloudapp.azure.com
 WEB_HEROKU_SRV = https://${URL_HEROKU}#Pruebas en remoto
 WEB_ZEIT_SRV = https://${URL_ZEIT}#Pruebas en remoto
