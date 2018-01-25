@@ -97,4 +97,10 @@ var routes = Routes{
         "/delete/{id}",
         FDelete,
     },
+    Route{
+        "Help",
+        "GET",
+        "/help",
+        FHelp,
+    },
 }
